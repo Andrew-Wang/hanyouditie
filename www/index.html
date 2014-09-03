@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首尔地铁图_韩国地铁线路图中文版_韩国釜山地铁线路图_韩游网</title>
+<meta name="keywords" content="首尔地铁图，韩国地铁线路图，韩国地铁图中文版，韩国釜山地铁线路图">
+<meta name="description" content="韩游网中文版韩国地铁线路图，提供首尔、釜山、大田、大邱等地区的地铁乘坐信息，只要在地铁图上选择乘坐的起点，到达的终点，即可出来乘坐的最佳路线包含所需时间、费用、换乘次数、总站数等详细信息，非常方便、实用！">
+<link href="http://ditie.hanyouwang.com/css/subway.css" rel="stylesheet" type="text/css" />
+<link href="http://ditie.hanyouwang.com/css/jquery.autocomplete.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://ditie.hanyouwang.com/js/jquery.js"></script>
+<script type="text/javascript" src="http://ditie.hanyouwang.com/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="http://ditie.hanyouwang.com/js/config.js"></script>
+<script type="text/javascript" src="http://ditie.hanyouwang.com/ol/OpenLayers.js"></script>
+<script type="text/javascript" src="http://ditie.hanyouwang.com/js/map.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	     $(".subway_right").width($(window).width()-348);
+         $(".subway_right").height($(window).height()-80);
+         $(".map_left").height($(window).height()-80);
+	     $(".subway_map").height($(window).height()-80);
+		 
+  /*
+    屏幕大小监听
+  */
+  $(window).resize(function() {
+	     $(".subway_right").width($(window).width()-348);
+	     $(".subway_right").height($(window).height()-80);
+	     $(".map_left").height($(window).height()-80);
+		 $(".subway_map").height($(window).height()-80);
+		 
+  });
+  $("#subwaynav li").each(function(i){
+        $(this).click(function(){
+            switab('#subwaynav li','.mapcontent','action','#subwaynav2 li',i);
+			        
+        })
+    })
+  $("#subwaynav2 li").each(function(i){
+        $(this).click(function(){
+            switab('#subwaynav2 li','.mapcontent','action','#subwaynav li',i);
+			        
+        })
+    })
+	
+   $("#lyul li").each(function(i){
+        $(this).click(function(){
+            switab('#lyul li','.lycontent','on','',i);
+			        
+        })
+    })
+	 $("#closebtn").click(function(){
+             $(".ly_subway").hide(); 
+			        
+        })
+   
+        initMap();
+	    
+        initStationInfo();
+});
+
+
+/** 
+ *切换效果 
+ */  
+function switab(tab,con,tab_c_css,tab_2,no) {  
+    $(tab).each(function(i){  
+        if(i == no)  
+        {  
+            $(this).addClass(tab_c_css);  
+			$(this).find('i').attr("id","jiantou");
+			/*$("#lyul li i").attr("id","jiantou");*/  
+        }else  
+        {  
+            $(this).removeClass(tab_c_css);
+			$(this).find('i').removeAttr("id");  
+			/*$("#lyul li i").removeAttr("id");*/
+        }  
+    }) 
+	if(tab_2){
+		$(tab_2).each(function(i) {
+            if(i == no)  
+        {  
+            $(this).addClass(tab_c_css);  
+			
+        }else  
+        {  
+            $(this).removeClass(tab_c_css);  
+        }  
+        });
+	}
+    if (con)  
+    {  
+        $(con).each(function(i){  
+            if(i == no)  
+            {   
+		
+                $(this).show();  
+            }else  
+            {  
+		
+                $(this).hide();  
+            }  
+        })
+    }  
+} 
+</script>
+    </head>
+<body style="overflow-y:hidden">
+
+	<div class="subway">
+		<div class="subway_head">
+			<div style="width: 980px; height: 100%;">
+				<div class="logo">
+					<a id="imgLogo" href="http://www.hanyouwang.com/"  target="_blank"> <img src="images/logo.png" />
+					</a>
+				</div>
+				<div class="searchBox">
+					<!-- srh fav route -->
+					<!-- <form id="#">
+						<input id="keywordTxt" class="sInput" value="">
+							<input type="button" class="sButton" value="搜索">
+								
+					</form> -->
+					<form action="http://search.hanyouwang.com/cse/search" target="_blank">
+					<input name="s" type="hidden" value="17066215809092729867">
+					<input type="text" name="q" size="30" class="sInput">
+					<input type="submit" value="搜索" class="sButton">
+				</form>
+					
+				</div>
+				<div class="subway_icon">
+					<a href="http://www.hanyouwang.com/piao.html" target="_blank"><i class="piao"></i>门票预订 </a>
+					<a href="http://www.hanyouwang.com/ticket.html" target="_blank"><i class="ticket"></i>公演预订 </a>
+					<a href="http://www.hanyouwang.com/a/special/wifi/" target="_blank"><i class="wifi"></i>WIFI预订</a>
+					<a href="http://www.hanyouwang.com/a/zizhuyou/" target="_blank"><i class="raiders"></i>旅游攻略 </a>
+					<a href="http://www.hanyouwang.com/a/youhui/" target="_blank"><i class="coupon"></i>优惠券 </a>
+					<a href="http://www.hanyouwang.com/car.html" target="_blank"><i class="car"></i>导游租车  </a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="subway_left">
+			<ul class="subway_nav clearfix" id="subwaynav">
+				<li class="action"><a href="#">首尔</a></li>
+				<!-- <li><a href="#">釜山</a></li> -->
+			</ul>
+
+			<div class="searchSite">
+				<dl class="searchSite_dl clearfix">
+					<dt>
+						<input type="text" name="startStation" id="startStation" value="起始地" onchange="startStationOnChange()"/><input type="text"
+							name="endStation" id="endStation" value="到达地" onchange="endStationOnChange()"/>
+					</dt>
+					<dd>
+						<a onclick="exchangeStation()"></a>
+					</dd>
+				</dl>
+				<div class="searchSite_btn">
+					<a onclick = "getRoute()">查看路线</a>
+				</div>
+			</div>
+            <a href="http://www.hanyouwang.com/a/93-1543.html" target="_blank"><div class="explain">
+          <h3><i></i>地铁使用说明</h3>
+          <dl class="clearfix"><dt><img src="images/dtjieshao.jpg" /></dt>
+          <dd>韩国首尔地铁，是世界前五大载客量最高的地铁系统，位于韩国的首都首尔市。<span>点击查看</span></dd></dl>
+      </div></a>
+     <a href="http://www.hanyouwang.com/a/93-2891.html" target="_blank"><div class="explain">
+          <h3><i></i>地铁卡介绍</h3>
+          <dl class="clearfix"><dt><img src="images/jtkjieshao.jpg" /></dt>
+          <dd>韩国T-money交通卡可以说是最普及的一种交通卡，韩游网免费赠送T-money卡活动进行中。<span>点击查看</span></dd></dl>
+      </div></a>
+  
+		</div>
+
+
+
+
+
+		<div id="tabs-r-1" class="subway_right">
+			<div class="subway_right_nav" id="rightnav">
+				<!-- <ul class="subway_nav2 " id="subwaynav2">
+					<li class="action" style="border-right: 1px #737c94 solid"><a
+						href="#">首尔</a></li>
+					<li><a href="#">釜山</a></li>
+				</ul>
+				<ul class="language">
+					<li style="border-right: 1px #cbcbcb solid"><a href="#"
+						class="add">中文</a></li>
+					<li style="border-right: 1px #cbcbcb solid"><a href="#">韩语</a></li>
+					<li><a href="#">英语</a></li>
+				</ul> -->
+			</div>
+			<div class="subway_line">
+				<div class="mapcontent">
+					<div class="line_box clearfix">
+						<a href="#"><span onclick="requireLinePoints('line1',this);"><i class="se_1">1</i>号线</span></a> <a href="#"><span onclick="requireLinePoints('line2',this);"><i
+							class="se_2">2</i>号线</span></a><a href="#"><span onclick="requireLinePoints('line3',this);"><i class="se_3">3</i>号线</span></a><a
+							href="#"><span onclick="requireLinePoints('line4',this);"><i class="se_4">4</i>号线</span></a><a href="#"><span onclick="requireLinePoints('line5',this);"><i class="se_5">5</i>号线</span></a><a
+							href="#"><span onclick="requireLinePoints('line6',this);"><i class="se_6">6</i>号线</span></a> <a href="#"><span onclick="requireLinePoints('line7',this);"><i
+							class="se_7">7</i>号线</span></a><a href="#"><span onclick="requireLinePoints('line8',this);"><i class="se_8">8</i>号线</span></a><a
+							href="#"><span onclick="requireLinePoints('line9',this);"><i class="se_9">9</i>号线</span></a><a href="#"><span onclick="requireLinePoints('linePTX',this);"><i
+							class="se_10"></i>盆唐线</span></a><a href="#"><span onclick="requireLinePoints('lineRCDT1',this);"><i class="se_11"></i>仁川线</span></a> <a
+							href="#"><span onclick="requireLinePoints('lineXPTX',this);"><i class="se_12"></i>新盆唐线</span></a><a href="#"><span onclick="requireLinePoints('lineGYX',this);"><i
+							class="se_13"></i>京议线</span></a><a href="#"><span onclick="requireLinePoints('lineZYX',this);"><i class="se_14"></i>中央线</span></a><a
+							href="#"><span onclick="requireLinePoints('lineG',this);"><i class="se_15"></i>京春线</span></a><a href="#"><span onclick="requireLinePoints('lineA',this);"><i
+							class="se_16"></i>机场线</span></a> <a href="#"><span onclick="requireLinePoints('lineYZFQDC',this);"><i class="se_17"></i>议政府线</span></a><a
+							href="#"><span onclick="requireLinePoints('lineSRX',this);"><i class="se_18"></i>水仁线</span></a><a href="#"><span onclick="requireLinePoints('lineABX',this);"><i
+							class="se_19"></i>爱宝乐园线</span></a>
+					</div>
+				</div>
+				<div class="mapcontent" style="display: none">
+					<div class="line_box clearfix">
+						<a href=""><i class="fs_1">1</i>号线</a> <a href=""><i
+							class="fs_2">2</i>号线</a><a href=""><i class="fs_3">3</i>号线</a><a
+							href=""><i class="fs_4">4</i>号线</a><a href=""><i class="fs_5"></i>釜山金海轻轨</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="subway_map" id="map" style="width: 100%; height: 100%;">
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="ly_subway" id="routeInfo" name="routeInfo" style="display: none;z-index:100000">
+		<div class="close">
+			<span id="closebtn" onclick="hideRouteInfo()">&times;</span>
+		</div>
+		<div class="str_to_end">
+			<i></i><span class="se_1" id="startStationLine_span">1号线</span><span id="startStation_span">出发站</span>&rarr;&nbsp;&nbsp;<span
+				id="endStationLine_span" class="se_2">2号线</span><span id="endStation_span">到达站</span>
+		</div>
+		<ul class="ly_ul" id="lyul">
+			<li class="on" style="border-right: 1px #ccc solid" onclick="getRoute(0)">最短时间<i
+				id="jiantou"></i></li>
+			<li onclick="getRoute(1)">最少换乘<i></i></li>
+		</ul>
+		<div class="lycontent">
+			<table width="320" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>&nbsp;</th>
+					<td style="width: 180px;"><b>所需时间</b>&nbsp;&nbsp;<span id="time"></span></td>
+					<td><b>总站数</b>&nbsp;&nbsp;<span id="stationNumber"></span></td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><b>换乘次数</b>&nbsp;&nbsp;<span id="trans"></span></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>交通卡&nbsp;&nbsp;<span id="cardMoney">100韩元</span></td>
+					<td>现金&nbsp;&nbsp;<span id="cashMoney">100韩元</span></td>
+				</tr>
+			</table>
+
+
+		</div>
+		<div class="lycontent" style="display: none">
+			<table width="320" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>&nbsp;</th>
+					<td style="width: 180px;"><b>所需时间</b>&nbsp;&nbsp;<span id="time1">10小时</span></td>
+					<td><b>总站数</b>&nbsp;&nbsp;<span id="stationNumber1">10站</span></td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><b>换乘次数</b>&nbsp;&nbsp;<span id="trans1">10次</span></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>交通卡&nbsp;&nbsp;<span id="cardMoney1">100韩元</span></td>
+					<td>现金&nbsp;&nbsp;<span id="cashMoney1">100韩元</span></td>
+				</tr>
+			</table>
+
+
+		</div>
+	</div>
+</body>
+</html>
+
